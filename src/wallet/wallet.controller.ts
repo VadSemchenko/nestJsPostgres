@@ -1,14 +1,15 @@
 import { Controller, Get, Req, Request, Post, Param, Query, Body } from '@nestjs/common';
 import { WalletService } from './wallet.service';
+import { Wallet } from './wallet.entity';
 
 @Controller('wallets')
 export class WalletController {
-  constructor(private readonly appService: WalletService) { }
+  constructor(private readonly walletService: WalletService) { }
 
   @Get('getWalletsByCompanyId')
   async getWalletsByCompanyId(@Query() query: { id: string }): Promise<string> {
     console.log('ID AT GET WALLETS BY COMPANY ID', query.id);
-    return this.appService.getWalletsByCompanyId();
+    return this.walletService.getWalletsByCompanyId();
   }
 
   @Get('getWalletsByCompanyIdAndCurrency/:companyId/:currency')
@@ -17,20 +18,20 @@ export class WalletController {
     currency: string;
   }): Promise<string> {
     console.log('PARAMS', params);
-    return this.appService.getWalletsByCompanyIdAndCurrency();
+    return this.walletService.getWalletsByCompanyIdAndCurrency();
   }
 
   @Get('getWalletById')
   async getWalletById(@Req() request: Request): Promise<string> {
-    return this.appService.getWalletById();
+    return this.walletService.getWalletById();
   }
 
   @Post('createWallet')
   async createWallet(@Body() body: {
     companyId: string;
     currency: string;
-  }): Promise<string> {
-    console.log('BODY', body);
-    return this.appService.createWallet();
+  }): Promise<Wallet> {
+    const { companyId, currency } = body;
+    return this.walletService.createWallet({ companyId, currency });
   }
 }

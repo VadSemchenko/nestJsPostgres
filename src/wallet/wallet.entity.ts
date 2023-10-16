@@ -6,7 +6,7 @@ export class Wallet {
     id: number;
 
     @Column()
-    compamyId: string;
+    companyId: string;
 
     @Column()
     balance: number;
