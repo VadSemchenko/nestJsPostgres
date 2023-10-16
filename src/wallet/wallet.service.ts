@@ -15,6 +15,6 @@ export class WalletService {
   }
 
   async createWallet(): Promise<string> {
-    return new Promise(res => res('getWalletById'));
+    return new Promise(res => res('createWallet'));
   }
 }
