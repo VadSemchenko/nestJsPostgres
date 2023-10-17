@@ -1,24 +1,26 @@
-import { Controller, Get, Req, Request, Post, Param, Query, Body } from '@nestjs/common';
+import { Controller, Get, Req, Request, Post, Param, Query, Body, Response } from '@nestjs/common';
 import { WalletService } from './wallet.service';
 import { Wallet } from './wallet.entity';
+import { CompanyName, Currency } from './wallet.enum';
+import { CreateWalletDto } from './wallet.dto';
 
 @Controller('wallets')
 export class WalletController {
   constructor(private readonly walletService: WalletService) { }
 
-  @Get('getWalletsByCompanyId')
-  async getWalletsByCompanyId(@Query() query: { id: string }): Promise<string> {
+  @Get('getWalletsBycompanyName')
+  async getWalletsBycompanyName(@Query() query: { id: string }): Promise<string> {
     console.log('ID AT GET WALLETS BY COMPANY ID', query.id);
-    return this.walletService.getWalletsByCompanyId();
+    return this.walletService.getWalletsBycompanyName();
   }
 
-  @Get('getWalletsByCompanyIdAndCurrency/:companyId/:currency')
-  async getWalletsByCompanyIdAndCurrency(@Param() params: {
-    companyId: string;
+  @Get('getWalletsBycompanyNameAndCurrency/:companyName/:currency')
+  async getWalletsBycompanyNameAndCurrency(@Param() params: {
+    companyName: string;
     currency: string;
   }): Promise<string> {
     console.log('PARAMS', params);
-    return this.walletService.getWalletsByCompanyIdAndCurrency();
+    return this.walletService.getWalletsBycompanyNameAndCurrency();
   }
 
   @Get('getWalletById')
@@ -27,11 +29,8 @@ export class WalletController {
   }
 
   @Post('createWallet')
-  async createWallet(@Body() body: {
-    companyId: string;
-    currency: string;
-  }): Promise<Wallet> {
-    const { companyId, currency } = body;
-    return this.walletService.createWallet({ companyId, currency });
+  async createWallet(@Body() createWalletDto: CreateWalletDto): Promise<Wallet> {
+    const { companyName, currency } = createWalletDto;
+    return this.walletService.createWallet({ companyName, currency });
   }
 }

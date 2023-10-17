@@ -11,23 +11,22 @@ export class WalletService {
     private walletRepository: Repository<Wallet>,
   ) { }
 
-  async getWalletsByCompanyId(): Promise<string> {
-    return new Promise(res => res('getWalletsByCompanyId'));
+  async getWalletsBycompanyName(): Promise<string> {
+    return new Promise(res => res('getWalletsBycompanyName'));
   }
 
-  async getWalletsByCompanyIdAndCurrency(): Promise<string> {
-    return new Promise(res => res('getWalletsByCompanyIdAndCurrency'));
+  async getWalletsBycompanyNameAndCurrency(): Promise<string> {
+    return new Promise(res => res('getWalletsBycompanyNameAndCurrency'));
   }
 
   async getWalletById(): Promise<string> {
     return new Promise(res => res('getWalletById'));
   }
 
-  async createWallet(data: Pick<Wallet, 'companyId' | 'currency'>): Promise<Wallet> {
-    const { companyId, currency } = data;
+  async createWallet(data: Pick<Wallet, 'companyName' | 'currency'>): Promise<Wallet> {
+    const { companyName, currency } = data;
     return this.walletRepository.save({
-      currency, companyId, balance: 0
+      currency, companyName, balance: 0
     });
-    // return new Promise(res => res('createWallet'));
   }
 }
