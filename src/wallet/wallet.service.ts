@@ -11,17 +11,17 @@ export class WalletService {
     private walletRepository: Repository<Wallet>,
   ) { }
 
-  async getWalletsBycompanyName(): Promise<string> {
-    return new Promise(res => res('getWalletsBycompanyName'));
-  }
+  // async getWalletsBycompanyName(): Promise<string> {
+  //   return new Promise(res => res('getWalletsBycompanyName'));
+  // }
 
-  async getWalletsBycompanyNameAndCurrency(): Promise<string> {
-    return new Promise(res => res('getWalletsBycompanyNameAndCurrency'));
-  }
+  // async getWalletsBycompanyNameAndCurrency(): Promise<string> {
+  //   return new Promise(res => res('getWalletsBycompanyNameAndCurrency'));
+  // }
 
-  async getWalletById(): Promise<string> {
-    return new Promise(res => res('getWalletById'));
-  }
+  // async getWalletById(): Promise<string> {
+  //   return new Promise(res => res('getWalletById'));
+  // }
 
   async createWallet(data: Pick<Wallet, 'companyName' | 'currency'>): Promise<Wallet> {
     const { companyName, currency } = data;
