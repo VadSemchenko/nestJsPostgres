@@ -8,16 +8,6 @@ import { CreateWalletDto } from './wallet.dto';
 export class WalletController {
   constructor(private readonly walletService: WalletService) { }
 
-  // @Get('getWalletsBycompanyName')
-  // async getWalletsBycompanyName(@Query() query: { id: string }): Promise<string> {
-  //   return this.walletService.getWalletsBycompanyName();
-  // }
-
-  // @Get('getWalletById')
-  // async getWalletById(@Req() request: Request): Promise<string> {
-  //   return this.walletService.getWalletById();
-  // }
-
   @Post('createWallet')
   async createWallet(@Body() createWalletDto: CreateWalletDto): Promise<Wallet> {
     const { companyName, currency } = createWalletDto;
