@@ -1,16 +1,17 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, ManyToMany, ManyToOne } from 'typeorm';
 import { CompanyName, Currency } from '../wallet/wallet.enum';
+import { Wallet } from '../wallet/wallet.entity';
 
 @Entity()
 export class Transaction {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
-    fromWallet: string;
+    @ManyToOne(() => Wallet, wallet => wallet.outgoingsTransactions)
+    fromWallet: Wallet;
 
-    @Column()
-    toWallet: string;
+    @ManyToOne(() => Wallet, wallet => wallet.incomingTransactions)
+    toWallet: Wallet;
 
     @Column()
     amount: number;

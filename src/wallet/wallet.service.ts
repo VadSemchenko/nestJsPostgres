@@ -11,10 +11,15 @@ export class WalletService {
     private walletRepository: Repository<Wallet>,
   ) { }
 
-  async createWallet(data: Pick<Wallet, 'companyName' | 'currency'>): Promise<Wallet> {
-    const { companyName, currency } = data;
+  async createWallet(data: Pick<Wallet, 'companyName' | 'currency' | 'balance'>): Promise<Wallet> {
+    const { companyName, currency, balance } = data;
     return this.walletRepository.save({
-      currency, companyName, balance: 0
+      currency, companyName, balance
     });
+  }
+
+  async findWalletById(stringId: string): Promise<Wallet> {
+    const id = + stringId;
+    return this.walletRepository.findOneBy({ id });
   }
 }
