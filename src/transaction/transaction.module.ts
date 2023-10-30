@@ -8,9 +8,9 @@ import { WalletModule } from '../wallet/wallet.module';
 
 @Module({
     imports: [TypeOrmModule.forFeature([Transaction]), WalletModule],
-    providers: [TransactionService, WalletService],
+    providers: [TransactionService],
     controllers: [TransactionController],
-    exports: [TypeOrmModule]
+    exports: []
 })
 
 export class TransactionModule { }

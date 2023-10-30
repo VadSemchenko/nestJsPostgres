@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Transaction } from './transaction.entity';
-import { Wallet } from '../wallet/wallet.entity';
-import { time } from 'console';
+import { WalletService } from 'src/wallet/wallet.service';
 
 @Injectable()
 export class TransactionService {
@@ -11,9 +10,7 @@ export class TransactionService {
   constructor(
     @InjectRepository(Transaction)
     private transactionRepository: Repository<Transaction>,
-
-    @InjectRepository(Wallet)
-    private walletRepository: Repository<Wallet>
+    private walletService: WalletService
   ) { }
 
   async createTransaction(data: Omit<Transaction, 'id' | 'timestamp' | 'exchangeRate'>): Promise<Transaction> {
@@ -22,10 +19,11 @@ export class TransactionService {
     const transaction = await this.transactionRepository.save({
       currency, fromWallet, toWallet, amount, exchangeRate: 1, timestamp
     });
+    // TODO: validate if fromWallet's balance stays positive after transaction
     const updatedFromWallet = { ...fromWallet, balance: fromWallet.balance - amount };
     const updateToWallet = { ...toWallet, balance: toWallet.balance + amount };
-    await this.walletRepository.save(updateToWallet);
-    await this.walletRepository.save(updatedFromWallet);
+    // TODO: calculate everything here and provide all the amount to wallet service
+    this.walletService.addTransactionToTheWallet('hello', 'world');
     return transaction;
   }
 }

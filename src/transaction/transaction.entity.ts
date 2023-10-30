@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, ManyToMany, ManyToOne } from 'typeorm';
-import { CompanyName, Currency } from '../wallet/wallet.enum';
+import { Currency } from '../wallet/wallet.enum';
 import { Wallet } from '../wallet/wallet.entity';
 
 @Entity()

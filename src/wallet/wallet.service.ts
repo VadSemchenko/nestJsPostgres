@@ -22,4 +22,8 @@ export class WalletService {
     const id = + stringId;
     return this.walletRepository.findOneBy({ id });
   }
+
+  async addTransactionToTheWallet(transactionId: string, walletId: string): Promise<any> {
+    console.log(transactionId, walletId);
+  }
 }

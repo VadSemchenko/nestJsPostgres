@@ -23,6 +23,4 @@ import { Transaction } from './transaction/transaction.entity';
     WalletModule, TransactionModule
   ],
 })
-export class AppModule {
-  constructor(private dataSource: DataSource) { }
-}
+export class AppModule { }
