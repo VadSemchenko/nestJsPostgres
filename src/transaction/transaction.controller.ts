@@ -11,11 +11,8 @@ export class TransactionController {
   @Post('createTransaction')
   async createTransaction(@Body() createTransactionDto: CreateTransactionDto): Promise<Transaction> {
     const { currency, fromWallet: fromWalletId, toWallet: toWalletId, amount } = createTransactionDto;
-    console.log('ATTEMPT TO CREATE TRANSACTION');
     const fromWallet = await this.walletService.findWalletById(fromWalletId);
-    console.log('FROM WALLET', fromWallet);
     const toWallet = await this.walletService.findWalletById(toWalletId);
-    console.log('TO WALLET', toWallet);
     const result = await this.transactionService.createTransaction({ fromWallet, toWallet, currency, amount });
     // TODO: add custom error handling here
     return result;
