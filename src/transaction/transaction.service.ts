@@ -22,6 +22,13 @@ export class TransactionService {
     const { fromWallet, toWallet, amount, currency } = data;
     const timestamp = `${Date.now()}`;
 
+    const doesFromWalletHaveEnoughMoney = fromWallet.balance > amount;
+
+    if (!doesFromWalletHaveEnoughMoney) {
+
+    }
+
+
     const params = new URLSearchParams();
     params.set('apikey', CURRENCY_EXCHANGE_API_KEY);
     const fullUrl = `${CURRENCY_EXCHANGE_URL}?${params.toString()}`;
