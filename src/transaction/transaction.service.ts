@@ -7,7 +7,7 @@ import querystring from 'querystring';
 import { Repository } from 'typeorm';
 import { Transaction } from './transaction.entity';
 import { WalletService } from 'src/wallet/wallet.service';
-import { CURRENCY_EXCHANGE_API_KEY } from '../../constants';
+import { CURRENCY_EXCHANGE_API_KEY, CURRENCY_EXCHANGE_URL } from '../../constants';
 
 @Injectable()
 export class TransactionService {
@@ -21,27 +21,16 @@ export class TransactionService {
   async createTransaction(data: Omit<Transaction, 'id' | 'timestamp' | 'exchangeRate'>): Promise<Transaction> {
     const { fromWallet, toWallet, amount, currency } = data;
     const timestamp = `${Date.now()}`;
-    console.log('QUERY STRING', querystring);
-    const exchangeUrl = 'http://data.fixer.io/api/convert';
-    // const query = {
-    //   access_key: CURRENCY_EXCHANGE_API_KEY,
-    //   from: fromWallet.currency,
-    //   to: toWallet.currency,
-    //   amount
-    // };
 
     const params = new URLSearchParams();
-    params.set('access_key', CURRENCY_EXCHANGE_API_KEY);
-    params.set('from', fromWallet.currency);
-    params.set('to', toWallet.currency);
-    params.set('amount', `${amount}`);
-
-    // const queryString = querystring.stringify(params);
-
-    // Append the query string to the base URL
-    const fullUrl = `${exchangeUrl}?${params.toString()}`;
-    const exchangeRateResponse = await ((await fetch(fullUrl)).json());
-    console.log('EXCHANGE RESPONSE', exchangeRateResponse);
+    params.set('apikey', CURRENCY_EXCHANGE_API_KEY);
+    const fullUrl = `${CURRENCY_EXCHANGE_URL}?${params.toString()}`;
+    console.log('FULL URL', fullUrl);
+    const { data: currencies } = await ((await fetch(fullUrl)).json());
+    console.log('EXCHANGE RESPONSE', currencies);
+    const fromWalletRate = currencies[fromWallet.currency]?.value;
+    const toWalletRate = currencies[toWallet.currency]?.value;
+    console.log('RATES', fromWalletRate, toWalletRate);
     // const exchangeRate = await fetch('')
 
     const transaction = await this.transactionRepository.save({
