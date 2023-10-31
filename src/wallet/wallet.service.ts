@@ -23,7 +23,7 @@ export class WalletService {
     return this.walletRepository.findOneBy({ id });
   }
 
-  async addTransactionToTheWallet(transactionId: string, walletId: string): Promise<any> {
-    console.log(transactionId, walletId);
+  async modifyWallet(data: Wallet): Promise<Wallet> {
+    return this.walletRepository.save(data);
   }
 }

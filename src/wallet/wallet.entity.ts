@@ -10,7 +10,7 @@ export class Wallet {
     @Column({ type: 'enum', enum: [CompanyName.GUESTY, CompanyName.INTELLIAS] })
     companyName: string;
 
-    @Column()
+    @Column({ type: 'float' })
     balance: number;
 
     @Column({ type: 'enum', enum: [Currency.EUR, Currency.USD] })

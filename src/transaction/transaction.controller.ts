@@ -12,20 +12,8 @@ export class TransactionController {
   async createTransaction(@Body() createTransactionDto: CreateTransactionDto): Promise<Transaction> {
     const { currency, fromWallet: fromWalletId, toWallet: toWalletId, amount } = createTransactionDto;
     const fromWallet = await this.walletService.findWalletById(fromWalletId);
-    console.log('FROM WALLET', fromWallet);
-    if (!fromWallet) {
-      throw new HttpException({
-        status: HttpStatus.NOT_FOUND,
-        message: 'From wallet does not exist'
-      }, HttpStatus.NOT_FOUND);
-    }
     const toWallet = await this.walletService.findWalletById(toWalletId);
-    if (!toWallet) {
-      throw new HttpException({
-        status: HttpStatus.NOT_FOUND,
-        message: 'To wallet does not exist'
-      }, HttpStatus.NOT_FOUND);
-    }
+    console.log('FROM WALLET', fromWallet);
     const result = await this.transactionService.createTransaction({ fromWallet, toWallet, currency, amount });
     // TODO: add custom error handling here
     return result;

@@ -13,13 +13,13 @@ export class Transaction {
     @ManyToOne(() => Wallet, wallet => wallet.incomingTransactions)
     toWallet: Wallet;
 
-    @Column()
+    @Column({ type: 'float' })
     amount: number;
 
     @Column({ type: 'enum', enum: [Currency.EUR, Currency.USD] })
     currency: Currency;
 
-    @Column()
+    @Column({ type: 'float' })
     exchangeRate: number;
 
     @Column()
