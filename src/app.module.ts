@@ -7,20 +7,24 @@ import { Wallet } from './wallet/wallet.entity';
 import { TransactionModule } from './transaction/transaction.module'
 import { Transaction } from './transaction/transaction.entity';
 
-
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: 'ec2-54-86-180-157.compute-1.amazonaws.com',
+      url: 'postgres://dirgkhzqxuycuc:d8e631e31a2eafdc038785e04a35a4108e7fceea7dfb80c2715cf1044ece340b@ec2-54-86-180-157.compute-1.amazonaws.com:5432/d1kt96110abqr8',
       port: 5432,
-      password: '@a00190019AAa',
-      username: 'postgres',
+      password: 'd8e631e31a2eafdc038785e04a35a4108e7fceea7dfb80c2715cf1044ece340b',
+      username: 'dirgkhzqxuycuc',
       entities: [Wallet, Transaction],
-      database: 'postgres',
-      synchronize: true,
+      database: 'd1kt96110abqr8',
+      ssl: {
+        rejectUnauthorized: false,
+      }
     }),
     WalletModule, TransactionModule
   ],
 })
 export class AppModule { }
+
+
