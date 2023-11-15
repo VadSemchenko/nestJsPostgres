@@ -20,7 +20,8 @@ import { Transaction } from './transaction/transaction.entity';
       database: 'd1kt96110abqr8',
       ssl: {
         rejectUnauthorized: false,
-      }
+      },
+      synchronize: true
     }),
     WalletModule, TransactionModule
   ],

@@ -3,6 +3,7 @@ import {
     IsNumber,
     IsString
 } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 import { CompanyName, Currency } from './wallet.enum';
 
@@ -13,6 +14,7 @@ export enum UserState {
 }
 
 export class CreateWalletDto {
+    @ApiProperty()
     @IsEnum(CompanyName)
     companyName: CompanyName;
 
