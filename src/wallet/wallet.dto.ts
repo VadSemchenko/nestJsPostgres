@@ -18,9 +18,11 @@ export class CreateWalletDto {
     @IsEnum(CompanyName)
     companyName: CompanyName;
 
+    @ApiProperty()
     @IsEnum(Currency)
     currency: Currency;
 
+    @ApiProperty()
     @IsNumber()
     balance: number;
 }
