@@ -12,7 +12,8 @@ import { Transaction } from './transaction/transaction.entity';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'ec2-54-86-180-157.compute-1.amazonaws.com',
-      url: 'postgres://dirgkhzqxuycuc:d8e631e31a2eafdc038785e04a35a4108e7fceea7dfb80c2715cf1044ece340b@ec2-54-86-180-157.compute-1.amazonaws.com:5432/d1kt96110abqr8',
+      // url: 'postgres://dirgkhzqxuycuc:d8e631e31a2eafdc038785e04a35a4108e7fceea7dfb80c2715cf1044ece340b@ec2-54-86-180-157.compute-1.amazonaws.com:5432/d1kt96110abqr8',
+      url: process.env.DATABASE_URL,
       port: 5432,
       password: 'd8e631e31a2eafdc038785e04a35a4108e7fceea7dfb80c2715cf1044ece340b',
       username: 'dirgkhzqxuycuc',
