@@ -10,19 +10,19 @@ import { CompanyName, Currency } from '../wallet/wallet.enum'
 
 
 export class CreateTransactionDto {
-    @ApiProperty()
+    @ApiProperty({ default: '1' })
     @IsString()
     fromWallet: string;
 
-    @ApiProperty()
+    @ApiProperty({ default: '4' })
     @IsString()
     toWallet: string;
 
-    @ApiProperty()
+    @ApiProperty({ default: 'EUR' })
     @IsEnum(Currency)
     currency: Currency;
 
-    @ApiProperty()
+    @ApiProperty({ default: 1 })
     @IsNumber()
     amount: number;
 

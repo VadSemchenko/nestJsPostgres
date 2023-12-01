@@ -14,15 +14,15 @@ export enum UserState {
 }
 
 export class CreateWalletDto {
-    @ApiProperty()
+    @ApiProperty({ default: 'Guesty' })
     @IsEnum(CompanyName)
     companyName: CompanyName;
 
-    @ApiProperty()
+    @ApiProperty({ default: 'EUR' })
     @IsEnum(Currency)
     currency: Currency;
 
-    @ApiProperty()
+    @ApiProperty({ default: 400 })
     @IsNumber()
     balance: number;
 }

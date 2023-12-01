@@ -3,6 +3,7 @@ import { WalletService } from './wallet.service';
 import { Wallet } from './wallet.entity';
 import { CompanyName, Currency } from './wallet.enum';
 import { CreateWalletDto, FindByIdParams } from './wallet.dto';
+import { ApiParam } from '@nestjs/swagger'
 
 @Controller('wallets')
 export class WalletController {
@@ -15,6 +16,7 @@ export class WalletController {
   }
 
   @Get('findWalletById/:id')
+  @ApiParam({ name: 'id', type: 'string' })
   async findWalletById(@Param() params: FindByIdParams): Promise<Wallet> {
     const { id } = params;
     return this.walletService.findWalletById(`${id}`);
